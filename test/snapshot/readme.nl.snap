@@ -1,0 +1,307 @@
+>struct Player
+#^^^^^^ source.nl storage.type.struct.nl
+#      ^ source.nl
+#       ^^^^^^ source.nl entity.name.type.struct.nl
+>  name: String
+#^^ source.nl
+#  ^^^^ source.nl variable.other.nl
+#      ^ source.nl meta.type-annotation.nl punctuation.separator.annotation.nl
+#       ^ source.nl meta.type-annotation.nl
+#        ^^^^^^ source.nl meta.type-annotation.nl support.type.primitive.nl
+>  health: Number = 100
+#^^ source.nl
+#  ^^^^^^ source.nl variable.other.nl
+#        ^ source.nl meta.type-annotation.nl punctuation.separator.annotation.nl
+#         ^ source.nl meta.type-annotation.nl
+#          ^^^^^^ source.nl meta.type-annotation.nl support.type.primitive.nl
+#                ^ source.nl
+#                 ^ source.nl keyword.operator.assignment.nl
+#                  ^ source.nl
+#                   ^^^ source.nl constant.numeric.decimal.nl
+>  armored: Bool = false
+#^^ source.nl
+#  ^^^^^^^ source.nl variable.other.nl
+#         ^ source.nl meta.type-annotation.nl punctuation.separator.annotation.nl
+#          ^ source.nl meta.type-annotation.nl
+#           ^^^^ source.nl meta.type-annotation.nl support.type.primitive.nl
+#               ^ source.nl
+#                ^ source.nl keyword.operator.assignment.nl
+#                 ^ source.nl
+#                  ^^^^^ source.nl constant.language.boolean.nl
+>end
+#^^^ source.nl keyword.control.nl
+>
+>fn Player.damage(amount: Number)
+#^^ source.nl meta.function.nl storage.type.function.nl
+#  ^ source.nl meta.function.nl
+#   ^^^^^^ source.nl meta.function.nl entity.name.type.nl
+#         ^ source.nl meta.function.nl punctuation.accessor.nl
+#          ^^^^^^ source.nl meta.function.nl entity.name.function.nl
+#                ^ source.nl meta.function.nl meta.parameters.nl punctuation.definition.parameters.begin.nl
+#                 ^^^^^^ source.nl meta.function.nl meta.parameters.nl variable.parameter.nl
+#                       ^ source.nl meta.function.nl meta.parameters.nl meta.type-annotation.nl punctuation.separator.annotation.nl
+#                        ^ source.nl meta.function.nl meta.parameters.nl meta.type-annotation.nl
+#                         ^^^^^^ source.nl meta.function.nl meta.parameters.nl meta.type-annotation.nl support.type.primitive.nl
+#                               ^ source.nl meta.function.nl meta.parameters.nl punctuation.definition.parameters.end.nl
+>  @health = Number.max(@health - amount, 0)
+#^^ source.nl
+#  ^ source.nl variable.other.instance.nl punctuation.definition.variable.nl
+#   ^^^^^^ source.nl variable.other.instance.nl
+#         ^ source.nl
+#          ^ source.nl keyword.operator.assignment.nl
+#           ^ source.nl
+#            ^^^^^^ source.nl support.class.builtin.nl
+#                  ^ source.nl punctuation.accessor.nl
+#                   ^^^ source.nl entity.name.function.member.nl
+#                      ^ source.nl meta.parens.nl punctuation.definition.parens.begin.nl
+#                       ^ source.nl meta.parens.nl variable.other.instance.nl punctuation.definition.variable.nl
+#                        ^^^^^^ source.nl meta.parens.nl variable.other.instance.nl
+#                              ^ source.nl meta.parens.nl
+#                               ^ source.nl meta.parens.nl keyword.operator.arithmetic.nl
+#                                ^ source.nl meta.parens.nl
+#                                 ^^^^^^ source.nl meta.parens.nl variable.other.nl
+#                                       ^ source.nl meta.parens.nl punctuation.separator.comma.nl
+#                                        ^ source.nl meta.parens.nl
+#                                         ^ source.nl meta.parens.nl constant.numeric.decimal.nl
+#                                          ^ source.nl meta.parens.nl punctuation.definition.parens.end.nl
+>  self.die if @health == 0
+#^^ source.nl
+#  ^^^^ source.nl variable.language.self.nl
+#      ^ source.nl punctuation.accessor.nl
+#       ^^^ source.nl variable.other.member.nl
+#          ^ source.nl
+#           ^^ source.nl keyword.control.nl
+#             ^ source.nl
+#              ^ source.nl variable.other.instance.nl punctuation.definition.variable.nl
+#               ^^^^^^ source.nl variable.other.instance.nl
+#                     ^ source.nl
+#                      ^^ source.nl keyword.operator.comparison.nl
+#                        ^ source.nl
+#                         ^ source.nl constant.numeric.decimal.nl
+>end
+#^^^ source.nl keyword.control.nl
+>
+>fn Player.die
+#^^ source.nl meta.function.nl storage.type.function.nl
+#  ^ source.nl meta.function.nl
+#   ^^^^^^ source.nl meta.function.nl entity.name.type.nl
+#         ^ source.nl meta.function.nl punctuation.accessor.nl
+#          ^^^ source.nl meta.function.nl entity.name.function.nl
+>  print "#{@name} died"
+#^^ source.nl
+#  ^^^^^ source.nl support.function.builtin.nl
+#       ^ source.nl
+#        ^ source.nl string.quoted.double.nl punctuation.definition.string.begin.nl
+#         ^^ source.nl string.quoted.double.nl meta.embedded.line.nl punctuation.section.embedded.begin.nl
+#           ^ source.nl string.quoted.double.nl meta.embedded.line.nl variable.other.instance.nl punctuation.definition.variable.nl
+#            ^^^^ source.nl string.quoted.double.nl meta.embedded.line.nl variable.other.instance.nl
+#                ^ source.nl string.quoted.double.nl meta.embedded.line.nl punctuation.section.embedded.end.nl
+#                 ^^^^^ source.nl string.quoted.double.nl
+#                      ^ source.nl string.quoted.double.nl punctuation.definition.string.end.nl
+>end
+#^^^ source.nl keyword.control.nl
+>
+>on PlayerHit as 'armor' do |target, amount|
+#^^ source.nl storage.type.event.nl
+#  ^ source.nl
+#   ^^^^^^^^^ source.nl entity.name.function.event.nl
+#            ^ source.nl
+#             ^^ source.nl keyword.operator.type.nl
+#               ^ source.nl
+#                ^ source.nl string.quoted.single.nl punctuation.definition.string.begin.nl
+#                 ^^^^^ source.nl string.quoted.single.nl
+#                      ^ source.nl string.quoted.single.nl punctuation.definition.string.end.nl
+#                       ^ source.nl
+#                        ^^ source.nl meta.block.parameters.nl keyword.control.do.nl
+#                          ^ source.nl meta.block.parameters.nl
+#                           ^ source.nl meta.block.parameters.nl punctuation.definition.parameters.begin.nl
+#                            ^^^^^^ source.nl meta.block.parameters.nl variable.parameter.nl
+#                                  ^ source.nl meta.block.parameters.nl punctuation.separator.comma.nl
+#                                   ^ source.nl meta.block.parameters.nl
+#                                    ^^^^^^ source.nl meta.block.parameters.nl variable.parameter.nl
+#                                          ^ source.nl meta.block.parameters.nl punctuation.definition.parameters.end.nl
+>  return amount / 2 if target.armored
+#^^ source.nl
+#  ^^^^^^ source.nl keyword.control.nl
+#        ^ source.nl
+#         ^^^^^^ source.nl variable.other.nl
+#               ^ source.nl
+#                ^ source.nl keyword.operator.arithmetic.nl
+#                 ^ source.nl
+#                  ^ source.nl constant.numeric.decimal.nl
+#                   ^ source.nl
+#                    ^^ source.nl keyword.control.nl
+#                      ^ source.nl
+#                       ^^^^^^ source.nl variable.other.nl
+#                             ^ source.nl punctuation.accessor.nl
+#                              ^^^^^^^ source.nl variable.other.member.nl
+>end
+#^^^ source.nl keyword.control.nl
+>
+>on PlayerHit do |target: Player, amount: Number|
+#^^ source.nl storage.type.event.nl
+#  ^ source.nl
+#   ^^^^^^^^^ source.nl entity.name.function.event.nl
+#            ^ source.nl
+#             ^^ source.nl meta.block.parameters.nl keyword.control.do.nl
+#               ^ source.nl meta.block.parameters.nl
+#                ^ source.nl meta.block.parameters.nl punctuation.definition.parameters.begin.nl
+#                 ^^^^^^ source.nl meta.block.parameters.nl variable.parameter.nl
+#                       ^ source.nl meta.block.parameters.nl meta.type-annotation.nl punctuation.separator.annotation.nl
+#                        ^ source.nl meta.block.parameters.nl meta.type-annotation.nl
+#                         ^^^^^^ source.nl meta.block.parameters.nl meta.type-annotation.nl entity.name.type.nl
+#                               ^ source.nl meta.block.parameters.nl punctuation.separator.comma.nl
+#                                ^ source.nl meta.block.parameters.nl
+#                                 ^^^^^^ source.nl meta.block.parameters.nl variable.parameter.nl
+#                                       ^ source.nl meta.block.parameters.nl meta.type-annotation.nl punctuation.separator.annotation.nl
+#                                        ^ source.nl meta.block.parameters.nl meta.type-annotation.nl
+#                                         ^^^^^^ source.nl meta.block.parameters.nl meta.type-annotation.nl support.type.primitive.nl
+#                                               ^ source.nl meta.block.parameters.nl meta.type-annotation.nl keyword.operator.union.nl
+>  target.damage amount
+#^^ source.nl meta.block.parameters.nl
+#  ^^^^^^ source.nl meta.block.parameters.nl variable.other.nl
+#        ^ source.nl meta.block.parameters.nl punctuation.accessor.nl
+#         ^^^^^^ source.nl meta.block.parameters.nl variable.other.member.nl
+#               ^ source.nl meta.block.parameters.nl
+#                ^^^^^^ source.nl meta.block.parameters.nl variable.parameter.nl
+>end
+#^^^ source.nl meta.block.parameters.nl variable.parameter.nl
+>
+>fn describe(msg)
+#^^ source.nl meta.block.parameters.nl meta.function.nl storage.type.function.nl
+#  ^ source.nl meta.block.parameters.nl meta.function.nl
+#   ^^^^^^^^ source.nl meta.block.parameters.nl meta.function.nl entity.name.function.nl
+#           ^ source.nl meta.block.parameters.nl meta.function.nl meta.parameters.nl punctuation.definition.parameters.begin.nl
+#            ^^^ source.nl meta.block.parameters.nl meta.function.nl meta.parameters.nl variable.parameter.nl
+#               ^ source.nl meta.block.parameters.nl meta.function.nl meta.parameters.nl punctuation.definition.parameters.end.nl
+>  case msg
+#^^ source.nl meta.block.parameters.nl
+#  ^^^^ source.nl meta.block.parameters.nl keyword.control.nl
+#      ^ source.nl meta.block.parameters.nl
+#       ^^^ source.nl meta.block.parameters.nl variable.parameter.nl
+>  when {kind: "move", to: dest}
+#^^ source.nl meta.block.parameters.nl
+#  ^^^^ source.nl meta.block.parameters.nl keyword.control.nl
+#      ^ source.nl meta.block.parameters.nl
+#       ^ source.nl meta.block.parameters.nl meta.braces.nl punctuation.definition.braces.begin.nl
+#        ^^^^ source.nl meta.block.parameters.nl meta.braces.nl support.type.property-name.nl
+#            ^ source.nl meta.block.parameters.nl meta.braces.nl punctuation.separator.key-value.nl
+#             ^ source.nl meta.block.parameters.nl meta.braces.nl
+#              ^ source.nl meta.block.parameters.nl meta.braces.nl string.quoted.double.nl punctuation.definition.string.begin.nl
+#               ^^^^ source.nl meta.block.parameters.nl meta.braces.nl string.quoted.double.nl
+#                   ^ source.nl meta.block.parameters.nl meta.braces.nl string.quoted.double.nl punctuation.definition.string.end.nl
+#                    ^ source.nl meta.block.parameters.nl meta.braces.nl punctuation.separator.comma.nl
+#                     ^ source.nl meta.block.parameters.nl meta.braces.nl
+#                      ^^ source.nl meta.block.parameters.nl meta.braces.nl support.type.property-name.nl
+#                        ^ source.nl meta.block.parameters.nl meta.braces.nl punctuation.separator.key-value.nl
+#                         ^ source.nl meta.block.parameters.nl meta.braces.nl
+#                          ^^^^ source.nl meta.block.parameters.nl meta.braces.nl variable.other.nl
+#                              ^ source.nl meta.block.parameters.nl meta.braces.nl punctuation.definition.braces.end.nl
+>    "moving to #{dest}"
+#^^^^ source.nl meta.block.parameters.nl
+#    ^ source.nl meta.block.parameters.nl string.quoted.double.nl punctuation.definition.string.begin.nl
+#     ^^^^^^^^^^ source.nl meta.block.parameters.nl string.quoted.double.nl
+#               ^^ source.nl meta.block.parameters.nl string.quoted.double.nl meta.embedded.line.nl punctuation.section.embedded.begin.nl
+#                 ^^^^ source.nl meta.block.parameters.nl string.quoted.double.nl meta.embedded.line.nl variable.other.nl
+#                     ^ source.nl meta.block.parameters.nl string.quoted.double.nl meta.embedded.line.nl punctuation.section.embedded.end.nl
+#                      ^ source.nl meta.block.parameters.nl string.quoted.double.nl punctuation.definition.string.end.nl
+>  when Player {name} if name.len > 3
+#^^ source.nl meta.block.parameters.nl
+#  ^^^^ source.nl meta.block.parameters.nl keyword.control.nl
+#      ^ source.nl meta.block.parameters.nl
+#       ^^^^^^ source.nl meta.block.parameters.nl entity.name.type.nl
+#             ^ source.nl meta.block.parameters.nl
+#              ^ source.nl meta.block.parameters.nl meta.braces.nl punctuation.definition.braces.begin.nl
+#               ^^^^ source.nl meta.block.parameters.nl meta.braces.nl variable.other.nl
+#                   ^ source.nl meta.block.parameters.nl meta.braces.nl punctuation.definition.braces.end.nl
+#                    ^ source.nl meta.block.parameters.nl
+#                     ^^ source.nl meta.block.parameters.nl keyword.control.nl
+#                       ^ source.nl meta.block.parameters.nl
+#                        ^^^^ source.nl meta.block.parameters.nl variable.other.nl
+#                            ^ source.nl meta.block.parameters.nl punctuation.accessor.nl
+#                             ^^^ source.nl meta.block.parameters.nl variable.other.member.nl
+#                                ^ source.nl meta.block.parameters.nl
+#                                 ^ source.nl meta.block.parameters.nl keyword.operator.comparison.nl
+#                                  ^ source.nl meta.block.parameters.nl
+#                                   ^ source.nl meta.block.parameters.nl constant.numeric.decimal.nl
+>    "a player with a long name"
+#^^^^ source.nl meta.block.parameters.nl
+#    ^ source.nl meta.block.parameters.nl string.quoted.double.nl punctuation.definition.string.begin.nl
+#     ^^^^^^^^^^^^^^^^^^^^^^^^^ source.nl meta.block.parameters.nl string.quoted.double.nl
+#                              ^ source.nl meta.block.parameters.nl string.quoted.double.nl punctuation.definition.string.end.nl
+>  when is String
+#^^ source.nl meta.block.parameters.nl
+#  ^^^^ source.nl meta.block.parameters.nl keyword.control.nl
+#      ^ source.nl meta.block.parameters.nl
+#       ^^ source.nl meta.block.parameters.nl keyword.operator.type.nl
+#         ^ source.nl meta.block.parameters.nl
+#          ^^^^^^ source.nl meta.block.parameters.nl support.type.primitive.nl
+>    "a message: #{msg}"
+#^^^^ source.nl meta.block.parameters.nl
+#    ^ source.nl meta.block.parameters.nl string.quoted.double.nl punctuation.definition.string.begin.nl
+#     ^^^^^^^^^^^ source.nl meta.block.parameters.nl string.quoted.double.nl
+#                ^^ source.nl meta.block.parameters.nl string.quoted.double.nl meta.embedded.line.nl punctuation.section.embedded.begin.nl
+#                  ^^^ source.nl meta.block.parameters.nl string.quoted.double.nl meta.embedded.line.nl variable.other.nl
+#                     ^ source.nl meta.block.parameters.nl string.quoted.double.nl meta.embedded.line.nl punctuation.section.embedded.end.nl
+#                      ^ source.nl meta.block.parameters.nl string.quoted.double.nl punctuation.definition.string.end.nl
+>  else
+#^^ source.nl meta.block.parameters.nl
+#  ^^^^ source.nl meta.block.parameters.nl variable.parameter.nl
+>    "something else"
+#^^^^ source.nl meta.block.parameters.nl
+#    ^ source.nl meta.block.parameters.nl string.quoted.double.nl punctuation.definition.string.begin.nl
+#     ^^^^^^^^^^^^^^ source.nl meta.block.parameters.nl string.quoted.double.nl
+#                   ^ source.nl meta.block.parameters.nl string.quoted.double.nl punctuation.definition.string.end.nl
+>  end
+#^^ source.nl meta.block.parameters.nl
+#  ^^^ source.nl meta.block.parameters.nl variable.parameter.nl
+>end
+#^^^ source.nl meta.block.parameters.nl variable.parameter.nl
+>
+>let ayla = Player { name: "Ayla" }
+#^^^ source.nl meta.block.parameters.nl storage.type.variable.nl
+#   ^ source.nl meta.block.parameters.nl
+#    ^^^^ source.nl meta.block.parameters.nl variable.parameter.nl
+#        ^ source.nl meta.block.parameters.nl
+#         ^ source.nl meta.block.parameters.nl keyword.operator.assignment.nl
+#          ^ source.nl meta.block.parameters.nl
+#           ^^^^^^ source.nl meta.block.parameters.nl entity.name.type.nl
+#                 ^ source.nl meta.block.parameters.nl
+#                  ^ source.nl meta.block.parameters.nl meta.braces.nl punctuation.definition.braces.begin.nl
+#                   ^ source.nl meta.block.parameters.nl meta.braces.nl
+#                    ^^^^ source.nl meta.block.parameters.nl meta.braces.nl support.type.property-name.nl
+#                        ^ source.nl meta.block.parameters.nl meta.braces.nl punctuation.separator.key-value.nl
+#                         ^ source.nl meta.block.parameters.nl meta.braces.nl
+#                          ^ source.nl meta.block.parameters.nl meta.braces.nl string.quoted.double.nl punctuation.definition.string.begin.nl
+#                           ^^^^ source.nl meta.block.parameters.nl meta.braces.nl string.quoted.double.nl
+#                               ^ source.nl meta.block.parameters.nl meta.braces.nl string.quoted.double.nl punctuation.definition.string.end.nl
+#                                ^ source.nl meta.block.parameters.nl meta.braces.nl
+#                                 ^ source.nl meta.block.parameters.nl meta.braces.nl punctuation.definition.braces.end.nl
+>Event.run "PlayerHit", ayla, 120     # Ayla died
+#^^^^^ source.nl meta.block.parameters.nl support.class.builtin.nl
+#     ^ source.nl meta.block.parameters.nl punctuation.accessor.nl
+#      ^^^ source.nl meta.block.parameters.nl variable.other.member.nl
+#         ^ source.nl meta.block.parameters.nl
+#          ^ source.nl meta.block.parameters.nl string.quoted.double.nl punctuation.definition.string.begin.nl
+#           ^^^^^^^^^ source.nl meta.block.parameters.nl string.quoted.double.nl
+#                    ^ source.nl meta.block.parameters.nl string.quoted.double.nl punctuation.definition.string.end.nl
+#                     ^ source.nl meta.block.parameters.nl punctuation.separator.comma.nl
+#                      ^ source.nl meta.block.parameters.nl
+#                       ^^^^ source.nl meta.block.parameters.nl variable.parameter.nl
+#                           ^ source.nl meta.block.parameters.nl punctuation.separator.comma.nl
+#                            ^ source.nl meta.block.parameters.nl
+#                             ^^^ source.nl meta.block.parameters.nl constant.numeric.decimal.nl
+#                                ^^^^^ source.nl meta.block.parameters.nl
+#                                     ^ source.nl meta.block.parameters.nl comment.line.number-sign.nl punctuation.definition.comment.nl
+#                                      ^^^^^^^^^^ source.nl meta.block.parameters.nl comment.line.number-sign.nl
+>print describe(ayla)                 # a player with a long name
+#^^^^^ source.nl meta.block.parameters.nl support.function.builtin.nl
+#     ^ source.nl meta.block.parameters.nl
+#      ^^^^^^^^ source.nl meta.block.parameters.nl entity.name.function.call.nl
+#              ^ source.nl meta.block.parameters.nl meta.parens.nl punctuation.definition.parens.begin.nl
+#               ^^^^ source.nl meta.block.parameters.nl meta.parens.nl variable.other.nl
+#                   ^ source.nl meta.block.parameters.nl meta.parens.nl punctuation.definition.parens.end.nl
+#                    ^^^^^^^^^^^^^^^^^ source.nl meta.block.parameters.nl
+#                                     ^ source.nl meta.block.parameters.nl comment.line.number-sign.nl punctuation.definition.comment.nl
+#                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^ source.nl meta.block.parameters.nl comment.line.number-sign.nl
+>

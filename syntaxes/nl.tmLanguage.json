@@ -1,0 +1,1234 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "NL",
+  "scopeName": "source.nl",
+  "fileTypes": [
+    "nl"
+  ],
+  "patterns": [
+    {
+      "include": "#shebang"
+    },
+    {
+      "include": "#statements"
+    }
+  ],
+  "repository": {
+    "shebang": {
+      "match": "\\A(#!).*$",
+      "name": "comment.line.shebang.nl",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.comment.nl"
+        }
+      }
+    },
+    "statements": {
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#import"
+        },
+        {
+          "include": "#function-definition"
+        },
+        {
+          "include": "#struct-definition"
+        },
+        {
+          "include": "#interface-definition"
+        },
+        {
+          "include": "#enum-definition"
+        },
+        {
+          "include": "#module-definition"
+        },
+        {
+          "include": "#type-alias"
+        },
+        {
+          "include": "#event-handler"
+        },
+        {
+          "include": "#for-header"
+        },
+        {
+          "include": "#command-call"
+        },
+        {
+          "include": "#expression"
+        }
+      ]
+    },
+    "expression": {
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#strings"
+        },
+        {
+          "include": "#numbers"
+        },
+        {
+          "include": "#anonymous-function"
+        },
+        {
+          "include": "#block-params"
+        },
+        {
+          "include": "#short-function"
+        },
+        {
+          "include": "#type-annotation"
+        },
+        {
+          "include": "#keywords"
+        },
+        {
+          "include": "#constants"
+        },
+        {
+          "include": "#at-name"
+        },
+        {
+          "include": "#lua-method-call"
+        },
+        {
+          "include": "#lua-path"
+        },
+        {
+          "include": "#member"
+        },
+        {
+          "include": "#function-call"
+        },
+        {
+          "include": "#builtin-functions"
+        },
+        {
+          "include": "#cname"
+        },
+        {
+          "include": "#operators"
+        },
+        {
+          "include": "#braces"
+        },
+        {
+          "include": "#brackets"
+        },
+        {
+          "include": "#parens"
+        },
+        {
+          "include": "#punctuation"
+        },
+        {
+          "include": "#identifier"
+        }
+      ]
+    },
+    "comments": {
+      "patterns": [
+        {
+          "match": "(##)(?!#).*$",
+          "name": "comment.line.double-number-sign.documentation.nl",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.comment.nl"
+            }
+          }
+        },
+        {
+          "match": "(#).*$",
+          "name": "comment.line.number-sign.nl",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.comment.nl"
+            }
+          }
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "include": "#heredoc-raw"
+        },
+        {
+          "include": "#heredoc"
+        },
+        {
+          "include": "#string-double"
+        },
+        {
+          "include": "#string-single"
+        }
+      ]
+    },
+    "heredoc-raw": {
+      "begin": "(\"\"\")(-?=)",
+      "end": "^\\s*(\"\"\")",
+      "name": "string.quoted.triple.raw.nl",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.string.begin.nl"
+        },
+        "2": {
+          "name": "storage.modifier.heredoc.nl"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.string.end.nl"
+        }
+      }
+    },
+    "heredoc": {
+      "begin": "(\"\"\")(-)?",
+      "end": "^\\s*(\"\"\")",
+      "name": "string.quoted.triple.nl",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.string.begin.nl"
+        },
+        "2": {
+          "name": "storage.modifier.heredoc.nl"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.string.end.nl"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#string-escape"
+        },
+        {
+          "include": "#interpolation"
+        }
+      ]
+    },
+    "string-double": {
+      "begin": "\"",
+      "end": "\"|(?<!\\\\)(?=$)",
+      "name": "string.quoted.double.nl",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.nl"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.nl"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#string-escape"
+        },
+        {
+          "include": "#interpolation"
+        }
+      ]
+    },
+    "string-single": {
+      "begin": "'",
+      "end": "'|(?=$)",
+      "name": "string.quoted.single.nl",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.nl"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.nl"
+        }
+      },
+      "patterns": [
+        {
+          "match": "\\\\['\\\\]",
+          "name": "constant.character.escape.nl"
+        }
+      ]
+    },
+    "string-escape": {
+      "patterns": [
+        {
+          "match": "\\\\(?:[abfnrtv\\\\\"'#]|x[0-9A-Fa-f]{2}|[0-9]{1,3}|u\\{[0-9A-Fa-f]+\\})",
+          "name": "constant.character.escape.nl"
+        },
+        {
+          "match": "\\\\$",
+          "name": "constant.character.escape.continuation.nl"
+        },
+        {
+          "match": "\\\\.",
+          "name": "invalid.illegal.escape.nl"
+        }
+      ]
+    },
+    "interpolation": {
+      "begin": "#\\{",
+      "end": "\\}",
+      "name": "meta.embedded.line.nl",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.section.embedded.begin.nl"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.section.embedded.end.nl"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#expression"
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "match": "\\b0[xX][0-9A-Fa-f_]+\\b",
+          "name": "constant.numeric.hex.nl"
+        },
+        {
+          "match": "\\b\\d[\\d_]*(?:\\.\\d[\\d_]*)?(?:[eE][+-]?\\d[\\d_]*)?\\b",
+          "name": "constant.numeric.decimal.nl"
+        }
+      ]
+    },
+    "constants": {
+      "patterns": [
+        {
+          "match": "(?<![\\w.@:])\\b(true|false)\\b",
+          "name": "constant.language.boolean.nl"
+        },
+        {
+          "match": "(?<![\\w.@:])\\b(nil)\\b",
+          "name": "constant.language.nil.nl"
+        },
+        {
+          "match": "(?<![\\w.@:])\\b(self)\\b",
+          "name": "variable.language.self.nl"
+        },
+        {
+          "match": "(?<![\\w.@:])\\b(Self)\\b",
+          "name": "variable.language.self-type.nl"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "match": "(?<![\\w.@:])\\b(if|elseif|else|unless|case|cond|when|while|until|loop|break|continue|return|try|catch|finally|do|end|spawn)\\b",
+          "name": "keyword.control.nl"
+        },
+        {
+          "match": "(?<![\\w.@:])\\b(in)\\b",
+          "name": "keyword.control.in.nl"
+        },
+        {
+          "match": "(?<![\\w.@:])\\b(pub|async|declare)\\b",
+          "name": "storage.modifier.nl"
+        },
+        {
+          "match": "(?<![\\w.@:])\\b(let|const|global)\\b",
+          "name": "storage.type.variable.nl"
+        },
+        {
+          "match": "(?<![\\w.@:])\\b(fn|struct|interface|enum|module|type|on)\\b",
+          "name": "storage.type.nl"
+        },
+        {
+          "match": "(?<![\\w.@:])\\b(import)\\b",
+          "name": "keyword.control.import.nl"
+        },
+        {
+          "match": "(?<![\\w.@:])\\b(and|or|not)\\b",
+          "name": "keyword.operator.logical.word.nl"
+        },
+        {
+          "match": "(?<![\\w.@:])\\b(is|as)\\b",
+          "name": "keyword.operator.type.nl"
+        }
+      ]
+    },
+    "builtin-types": {
+      "match": "(?<![\\w.@:])\\b(Number|String|Bool|Table|Function|Userdata|Thread|any|never|unknown|nil)\\b",
+      "name": "support.type.primitive.nl"
+    },
+    "builtin-functions": {
+      "match": "(?<![\\w.@:])\\b(print|raise|typeof|include|require|add_path|load_nl|keyed|tostring|tonumber|pairs|ipairs|next|select|unpack|pcall|xpcall|error|assert|rawget|rawset|rawequal|setmetatable|getmetatable|loadstring|load|loadfile|dofile|collectgarbage|getfenv|setfenv|gcinfo|newproxy)\\b(?![?!]?\\w)",
+      "name": "support.function.builtin.nl"
+    },
+    "cname": {
+      "patterns": [
+        {
+          "match": "(?<![\\w.@:])\\b(Number|String|Table)(?=\\.)",
+          "name": "support.class.builtin.nl"
+        },
+        {
+          "include": "#builtin-types"
+        },
+        {
+          "match": "(?<![\\w.@:])\\b(Number|String|Table|IO|OS|Coroutine|Debug|Bit|Package|Jit|Event|Worker|Task|Regex|Exception|LuaError|TypeError|MatchError|ConversionError|RegexError|EncodingError|SendError|WorkerError|To|From)\\b",
+          "name": "support.class.builtin.nl"
+        },
+        {
+          "match": "\\b[A-Z][A-Z0-9_]+\\b",
+          "name": "constant.other.caps.nl"
+        },
+        {
+          "match": "\\b[A-Z]\\w*\\b",
+          "name": "entity.name.type.nl"
+        }
+      ]
+    },
+    "at-name": {
+      "match": "(@)(\\w+)",
+      "name": "variable.other.instance.nl",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.variable.nl"
+        }
+      }
+    },
+    "lua-method-call": {
+      "match": "(?<=[\\w)\\]]|\\?\\.)(:)([A-Za-z_]\\w*)",
+      "captures": {
+        "1": {
+          "name": "punctuation.accessor.method.nl"
+        },
+        "2": {
+          "name": "entity.name.function.method.lua.nl"
+        }
+      }
+    },
+    "lua-path": {
+      "patterns": [
+        {
+          "match": "(?<![\\w)\\]'\"@.])(:)([A-Za-z_]\\w*)(?=\\s*\\()",
+          "name": "meta.lua-path.nl",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.lua-path.nl"
+            },
+            "2": {
+              "name": "support.function.lua.nl"
+            }
+          }
+        },
+        {
+          "match": "(?<![\\w)\\]'\"@.])(:)([A-Za-z_]\\w*)",
+          "name": "meta.lua-path.nl",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.lua-path.nl"
+            },
+            "2": {
+              "name": "variable.other.lua.nl"
+            }
+          }
+        }
+      ]
+    },
+    "member": {
+      "patterns": [
+        {
+          "match": "(\\.|\\?\\.)(await)\\b",
+          "captures": {
+            "1": {
+              "patterns": [
+                {
+                  "match": "\\?\\.",
+                  "name": "keyword.operator.nil-safe.nl"
+                },
+                {
+                  "match": "\\.",
+                  "name": "punctuation.accessor.nl"
+                }
+              ]
+            },
+            "2": {
+              "name": "keyword.control.await.nl"
+            }
+          }
+        },
+        {
+          "match": "(\\.|\\?\\.)([a-z_]\\w*)(?=\\s*\\()",
+          "captures": {
+            "1": {
+              "patterns": [
+                {
+                  "match": "\\?\\.",
+                  "name": "keyword.operator.nil-safe.nl"
+                },
+                {
+                  "match": "\\.",
+                  "name": "punctuation.accessor.nl"
+                }
+              ]
+            },
+            "2": {
+              "name": "entity.name.function.member.nl"
+            }
+          }
+        },
+        {
+          "match": "(\\.|\\?\\.)([a-z_]\\w*)",
+          "captures": {
+            "1": {
+              "patterns": [
+                {
+                  "match": "\\?\\.",
+                  "name": "keyword.operator.nil-safe.nl"
+                },
+                {
+                  "match": "\\.",
+                  "name": "punctuation.accessor.nl"
+                }
+              ]
+            },
+            "2": {
+              "name": "variable.other.member.nl"
+            }
+          }
+        }
+      ]
+    },
+    "function-call": {
+      "match": "(?<![\\w.@:])\\b([a-z_]\\w*)(?=\\s*\\()",
+      "captures": {
+        "1": {
+          "name": "entity.name.function.call.nl"
+        }
+      }
+    },
+    "command-call": {
+      "comment": "A name at the start of a statement followed by an argument: `print \"x\"`, `foo 123 do`, `target.damage amount`",
+      "match": "^\\s*((?:[\\w@]+(?:\\.|\\?\\.))*)(?!(?:and|as|async|break|case|catch|cond|const|continue|declare|do|else|elseif|end|enum|false|finally|fn|for|global|if|import|in|interface|is|let|loop|module|nil|not|on|or|pub|return|self|spawn|struct|true|try|type|unless|until|when|while)\\b)([a-z_]\\w*)(?=[ \\t]+(?:[\"'\\d]|@\\w|:\\w|\\[|do\\b|\\|\\|?|\\-?[a-z_]\\w*\\s*(?:,|->|$|\\.|\\?\\.)|(?:[A-Z]\\w*\\.)*[A-Z]\\w*(?:\\.\\w+)*\\s*(?:,|$)))",
+      "captures": {
+        "1": {
+          "patterns": [
+            {
+              "include": "#at-name"
+            },
+            {
+              "match": "\\?\\.",
+              "name": "keyword.operator.nil-safe.nl"
+            },
+            {
+              "match": "\\.",
+              "name": "punctuation.accessor.nl"
+            },
+            {
+              "include": "#member"
+            },
+            {
+              "include": "#cname"
+            },
+            {
+              "include": "#identifier"
+            }
+          ]
+        },
+        "2": {
+          "patterns": [
+            {
+              "include": "#builtin-functions"
+            },
+            {
+              "match": "\\w+",
+              "name": "entity.name.function.call.nl"
+            }
+          ]
+        }
+      }
+    },
+    "identifier": {
+      "match": "\\b[a-z_]\\w*\\b",
+      "name": "variable.other.nl"
+    },
+    "operators": {
+      "patterns": [
+        {
+          "match": "\\?\\?=|\\?\\?|\\?\\.",
+          "name": "keyword.operator.nil-safe.nl"
+        },
+        {
+          "match": "\\|>",
+          "name": "keyword.operator.pipe.nl"
+        },
+        {
+          "match": "->",
+          "name": "keyword.operator.arrow.nl"
+        },
+        {
+          "match": "\\.\\.\\.|\\.\\.(?!<)",
+          "name": "keyword.operator.range.nl"
+        },
+        {
+          "match": "<>=|\\*\\*=|//=|>>>=|<<=|>>=|\\|\\|=|&&=|[-+*/%|&^]=",
+          "name": "keyword.operator.assignment.compound.nl"
+        },
+        {
+          "match": "==|!=|<=|>=|<(?![<>])|>(?![>])",
+          "name": "keyword.operator.comparison.nl"
+        },
+        {
+          "match": "<>",
+          "name": "keyword.operator.concat.nl"
+        },
+        {
+          "match": "&&|\\|\\|",
+          "name": "keyword.operator.logical.nl"
+        },
+        {
+          "match": "(?<=[\\w)\\]])!(?!=)",
+          "name": "keyword.operator.nocall.nl"
+        },
+        {
+          "match": "!(?!=)",
+          "name": "keyword.operator.logical.nl"
+        },
+        {
+          "match": "\\*\\*|//|[-+*/%]",
+          "name": "keyword.operator.arithmetic.nl"
+        },
+        {
+          "match": ">>>|<<|>>|[|&^~]",
+          "name": "keyword.operator.bitwise.nl"
+        },
+        {
+          "match": "=",
+          "name": "keyword.operator.assignment.nl"
+        },
+        {
+          "match": "\\?",
+          "name": "keyword.operator.optional.nl"
+        }
+      ]
+    },
+    "punctuation": {
+      "patterns": [
+        {
+          "match": ",",
+          "name": "punctuation.separator.comma.nl"
+        },
+        {
+          "match": ";",
+          "name": "punctuation.terminator.statement.nl"
+        },
+        {
+          "match": "\\.",
+          "name": "punctuation.accessor.nl"
+        },
+        {
+          "match": ":",
+          "name": "punctuation.separator.colon.nl"
+        }
+      ]
+    },
+    "braces": {
+      "begin": "\\{",
+      "end": "\\}",
+      "name": "meta.braces.nl",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.braces.begin.nl"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.braces.end.nl"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#table-key"
+        },
+        {
+          "include": "#expression"
+        }
+      ]
+    },
+    "table-key": {
+      "match": "(?<![\\w.@:?])([A-Za-z_]\\w*|\\d+)\\s*(:)(?=\\s|$)",
+      "captures": {
+        "1": {
+          "name": "support.type.property-name.nl"
+        },
+        "2": {
+          "name": "punctuation.separator.key-value.nl"
+        }
+      }
+    },
+    "brackets": {
+      "begin": "\\[",
+      "end": "\\]",
+      "name": "meta.brackets.nl",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.brackets.begin.nl"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.brackets.end.nl"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#expression"
+        }
+      ]
+    },
+    "parens": {
+      "begin": "\\(",
+      "end": "\\)",
+      "name": "meta.parens.nl",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.parens.begin.nl"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.parens.end.nl"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#expression"
+        }
+      ]
+    },
+    "type-annotation": {
+      "comment": "`: Type` after a name, `)`, `]` or a closing `|`. Ends at the first token that cannot continue a type.",
+      "begin": "(?<=[\\w)\\]|])(:)(?=\\s)",
+      "end": "(?=[,)\\]}=#;]|\\|(?!\\s)|->|$)|(?<=[^\\s:|~,<])(?=\\s+(?!\\|\\s|\\?|<|\\[)\\S)",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.separator.annotation.nl"
+        }
+      },
+      "name": "meta.type-annotation.nl",
+      "patterns": [
+        {
+          "include": "#type"
+        }
+      ]
+    },
+    "type": {
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#builtin-types"
+        },
+        {
+          "include": "#constants"
+        },
+        {
+          "match": "\\b([A-Z]\\w*)(?:(\\.)([A-Z]\\w*))*\\b",
+          "name": "entity.name.type.nl"
+        },
+        {
+          "match": "\\?",
+          "name": "keyword.operator.optional.nl"
+        },
+        {
+          "match": "\\|",
+          "name": "keyword.operator.union.nl"
+        },
+        {
+          "match": "~",
+          "name": "keyword.operator.negation.nl"
+        },
+        {
+          "match": "<",
+          "name": "punctuation.definition.typeparameters.begin.nl"
+        },
+        {
+          "match": ">",
+          "name": "punctuation.definition.typeparameters.end.nl"
+        },
+        {
+          "match": ",",
+          "name": "punctuation.separator.comma.nl"
+        },
+        {
+          "begin": "\\[",
+          "end": "\\]",
+          "name": "meta.type.list.nl",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.brackets.begin.nl"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.brackets.end.nl"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#type"
+            }
+          ]
+        },
+        {
+          "begin": "\\{",
+          "end": "\\}",
+          "name": "meta.type.record.nl",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.braces.begin.nl"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.braces.end.nl"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#table-key"
+            },
+            {
+              "include": "#type"
+            }
+          ]
+        },
+        {
+          "begin": "\\(",
+          "end": "\\)",
+          "name": "meta.type.signature.nl",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.parens.begin.nl"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.parens.end.nl"
+            }
+          },
+          "patterns": [
+            {
+              "match": "(\\*)?\\b([a-z_]\\w*)\\b(?=\\s*:)",
+              "captures": {
+                "1": {
+                  "name": "keyword.operator.rest.nl"
+                },
+                "2": {
+                  "name": "variable.parameter.nl"
+                }
+              }
+            },
+            {
+              "match": ":",
+              "name": "punctuation.separator.annotation.nl"
+            },
+            {
+              "include": "#type"
+            }
+          ]
+        },
+        {
+          "match": ":",
+          "name": "punctuation.separator.annotation.nl"
+        }
+      ]
+    },
+    "type-params": {
+      "begin": "<",
+      "end": ">",
+      "name": "meta.type-parameters.nl",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.typeparameters.begin.nl"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.typeparameters.end.nl"
+        }
+      },
+      "patterns": [
+        {
+          "match": "\\b[A-Z]\\w*\\b",
+          "name": "entity.name.type.parameter.nl"
+        },
+        {
+          "match": ",",
+          "name": "punctuation.separator.comma.nl"
+        }
+      ]
+    },
+    "parameters": {
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#type-annotation"
+        },
+        {
+          "match": "(?<![=\\w.])\\s*(\\*)?\\b([a-z_]\\w*)\\b(?=\\s*(?:[,:=)|]|->|$))",
+          "captures": {
+            "1": {
+              "name": "keyword.operator.rest.nl"
+            },
+            "2": {
+              "name": "variable.parameter.nl"
+            }
+          }
+        },
+        {
+          "include": "#expression"
+        }
+      ]
+    },
+    "parameter-list": {
+      "begin": "\\(",
+      "end": "\\)",
+      "name": "meta.parameters.nl",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.parameters.begin.nl"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.parameters.end.nl"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#parameters"
+        }
+      ]
+    },
+    "function-definition": {
+      "comment": "`[pub] [async] fn name`, `fn Owner.name`, `fn Owner.+`; the signature ends at the line end or where the body of a one-line function starts",
+      "begin": "(?<![\\w.@:])(?:(pub)\\s+)?(?:(async)\\s+)?(fn)\\b(?:\\s+((?:(?:[A-Z]\\w*|Self)\\.)*)([a-z_]\\w*|\\[\\]=|\\[\\]|\\(\\)|\\*\\*|//|>>>|>>|<<|<>|==|<=|>=|[-+*/%|&~^<>]))?",
+      "end": "(?=\\s*(?:#|;|$))|(?<=\\))(?!\\s*[:<])|(?<=[\\w?\\]>)])(?=\\s+(?![|?\\[<(:{]|\\|\\s)\\S)",
+      "name": "meta.function.nl",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.modifier.pub.nl"
+        },
+        "2": {
+          "name": "storage.modifier.async.nl"
+        },
+        "3": {
+          "name": "storage.type.function.nl"
+        },
+        "4": {
+          "patterns": [
+            {
+              "match": "Self",
+              "name": "variable.language.self-type.nl"
+            },
+            {
+              "match": "[A-Z]\\w*",
+              "name": "entity.name.type.nl"
+            },
+            {
+              "match": "\\.",
+              "name": "punctuation.accessor.nl"
+            }
+          ]
+        },
+        "5": {
+          "name": "entity.name.function.nl"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#type-params"
+        },
+        {
+          "include": "#parameter-list"
+        },
+        {
+          "include": "#type-annotation"
+        }
+      ]
+    },
+    "anonymous-function": {
+      "comment": "`fn` in expression position: the same rule, so `let f = fn(a: Number) ... end` gets parameters",
+      "patterns": [
+        {
+          "include": "#function-definition"
+        }
+      ]
+    },
+    "struct-definition": {
+      "match": "^\\s*(?:(pub)\\s+)?(struct)\\s+([A-Z]\\w*)(?:\\s*(:)\\s*((?:[A-Z]\\w*\\.)*[A-Z]\\w*))?",
+      "captures": {
+        "1": {
+          "name": "storage.modifier.pub.nl"
+        },
+        "2": {
+          "name": "storage.type.struct.nl"
+        },
+        "3": {
+          "name": "entity.name.type.struct.nl"
+        },
+        "4": {
+          "name": "punctuation.separator.inheritance.nl"
+        },
+        "5": {
+          "name": "entity.other.inherited-class.nl"
+        }
+      }
+    },
+    "interface-definition": {
+      "begin": "^\\s*(?:(pub)\\s+)?(interface)\\s+([A-Z]\\w*)",
+      "end": "$",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.modifier.pub.nl"
+        },
+        "2": {
+          "name": "storage.type.interface.nl"
+        },
+        "3": {
+          "name": "entity.name.type.interface.nl"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#type-params"
+        },
+        {
+          "match": "\\b(for)\\s+((?:[A-Z]\\w*\\.)*[A-Z]\\w*)",
+          "captures": {
+            "1": {
+              "name": "keyword.control.for.nl"
+            },
+            "2": {
+              "name": "entity.name.type.nl"
+            }
+          }
+        }
+      ]
+    },
+    "enum-definition": {
+      "match": "^\\s*(?:(pub)\\s+)?(enum)\\s+([A-Z]\\w*)",
+      "captures": {
+        "1": {
+          "name": "storage.modifier.pub.nl"
+        },
+        "2": {
+          "name": "storage.type.enum.nl"
+        },
+        "3": {
+          "name": "entity.name.type.enum.nl"
+        }
+      }
+    },
+    "module-definition": {
+      "match": "^\\s*(?:(pub)\\s+)?(?:(declare)\\s+)?(module)\\s+((?:[A-Z]\\w*\\.)*[A-Z]\\w*)",
+      "captures": {
+        "1": {
+          "name": "storage.modifier.pub.nl"
+        },
+        "2": {
+          "name": "storage.modifier.declare.nl"
+        },
+        "3": {
+          "name": "storage.type.module.nl"
+        },
+        "4": {
+          "patterns": [
+            {
+              "match": "[A-Z]\\w*",
+              "name": "entity.name.type.module.nl"
+            },
+            {
+              "match": "\\.",
+              "name": "punctuation.accessor.nl"
+            }
+          ]
+        }
+      }
+    },
+    "type-alias": {
+      "begin": "^\\s*(?:(pub)\\s+)?(type)\\s+([A-Z]\\w*)",
+      "end": "$",
+      "name": "meta.type-alias.nl",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.modifier.pub.nl"
+        },
+        "2": {
+          "name": "storage.type.type.nl"
+        },
+        "3": {
+          "name": "entity.name.type.alias.nl"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#type-params"
+        },
+        {
+          "match": "=",
+          "name": "keyword.operator.assignment.nl"
+        },
+        {
+          "include": "#type"
+        }
+      ]
+    },
+    "event-handler": {
+      "match": "^\\s*(on)\\s+((?:[A-Z]\\w*\\.)*[A-Z]\\w*)",
+      "captures": {
+        "1": {
+          "name": "storage.type.event.nl"
+        },
+        "2": {
+          "name": "entity.name.function.event.nl"
+        }
+      }
+    },
+    "import": {
+      "begin": "^\\s*(import)\\b",
+      "end": "$",
+      "name": "meta.import.nl",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.import.nl"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#strings"
+        },
+        {
+          "match": "\\b(from|as)\\b",
+          "name": "keyword.control.import.nl"
+        },
+        {
+          "match": "[{},]",
+          "name": "punctuation.separator.import.nl"
+        },
+        {
+          "match": "\\b[A-Z]\\w*\\b",
+          "name": "entity.name.type.nl"
+        },
+        {
+          "match": "\\b[a-z_]\\w*\\b",
+          "name": "variable.other.import.nl"
+        }
+      ]
+    },
+    "for-header": {
+      "begin": "^\\s*(for)\\b",
+      "end": "$",
+      "name": "meta.for.nl",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.for.nl"
+        }
+      },
+      "patterns": [
+        {
+          "match": "\\b(step)\\b(?=\\s)",
+          "name": "keyword.control.step.nl"
+        },
+        {
+          "include": "#expression"
+        }
+      ]
+    },
+    "block-params": {
+      "begin": "(?<![\\w.@:])(do)\\s*(\\|)",
+      "end": "\\|",
+      "name": "meta.block.parameters.nl",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.do.nl"
+        },
+        "2": {
+          "name": "punctuation.definition.parameters.begin.nl"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.parameters.end.nl"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#parameters"
+        }
+      ]
+    },
+    "short-function": {
+      "patterns": [
+        {
+          "comment": "`|| -> expr`",
+          "match": "\\|\\|(?=\\s*(?::\\s*[^\\n]*?)?\\s*->)",
+          "name": "punctuation.definition.parameters.nl"
+        },
+        {
+          "comment": "`|a, b| -> expr`, `|a: Number|: Number -> expr`",
+          "begin": "(?<![|])(\\|)(?=[^|]*\\|\\s*(?::\\s*[^\\n]*?)?\\s*->)",
+          "end": "\\|",
+          "name": "meta.short-function.parameters.nl",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.parameters.begin.nl"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.parameters.end.nl"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#parameters"
+            }
+          ]
+        },
+        {
+          "comment": "`x -> expr`",
+          "match": "(?<![\\w.@:])\\b([a-z_]\\w*)(?=\\s*->)",
+          "captures": {
+            "1": {
+              "name": "variable.parameter.nl"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

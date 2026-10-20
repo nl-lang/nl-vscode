@@ -1,0 +1,39 @@
+{
+  "comments": {
+    "lineComment": "#"
+  },
+  "brackets": [
+    ["{", "}"],
+    ["[", "]"],
+    ["(", ")"]
+  ],
+  "autoClosingPairs": [
+    { "open": "{", "close": "}" },
+    { "open": "[", "close": "]" },
+    { "open": "(", "close": ")" },
+    { "open": "\"", "close": "\"", "notIn": ["string", "comment"] },
+    { "open": "'", "close": "'", "notIn": ["string", "comment"] },
+    { "open": "#{", "close": "}", "notIn": ["comment"] }
+  ],
+  "autoCloseBefore": ";:.,=}])> \n\t",
+  "surroundingPairs": [
+    ["{", "}"],
+    ["[", "]"],
+    ["(", ")"],
+    ["\"", "\""],
+    ["'", "'"],
+    ["|", "|"]
+  ],
+  "wordPattern": "(-?\\d*\\.\\d\\w*)|([^`~!#%^&*()\\-=+\\[{\\]}\\\\|;:'\",.<>/?\\s]+)",
+  "indentationRules": {
+    "increaseIndentPattern": "^\\s*(?:(?:pub\\s+)?(?:async\\s+)?(?:fn|struct|interface|enum|module|declare)\\b|(?:if|unless|while|until|loop|for|case|cond|try|do|else|elseif|when|catch|finally)\\b|on\\b.*\\bdo\\b)(?!.*\\bend\\b\\s*(?:#.*)?$)|^\\s*(?:let|const|global|[^#\"']*=)\\s.*\\bfn\\b(?!.*\\bend\\b\\s*(?:#.*)?$)|\\bdo\\s*(?:\\|[^|]*\\|)?\\s*(?:#.*)?$",
+    "decreaseIndentPattern": "^\\s*(?:end|else|elseif|when|catch|finally)\\b"
+  },
+  "folding": {
+    "offSide": true,
+    "markers": {
+      "start": "^\\s*#\\s*region\\b",
+      "end": "^\\s*#\\s*endregion\\b"
+    }
+  }
+}

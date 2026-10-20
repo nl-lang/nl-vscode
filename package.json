@@ -1,0 +1,152 @@
+{
+  "name": "nl-lang",
+  "displayName": "NL",
+  "description": "Syntax highlighting, language server and formatting for NL, the scripting language for games and mods",
+  "version": "0.1.0",
+  "publisher": "nl-lang",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nl-lang/nl-vscode"
+  },
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Formatters"
+  ],
+  "keywords": [
+    "nl",
+    "lua",
+    "luajit",
+    "garry's mod",
+    "gmod"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [],
+  "contributes": {
+    "languages": [
+      {
+        "id": "nl",
+        "aliases": [
+          "NL",
+          "nl"
+        ],
+        "extensions": [
+          ".nl",
+          ".d.nl"
+        ],
+        "firstLine": "^#!.*\\bnlc?\\b",
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "nl",
+        "scopeName": "source.nl",
+        "path": "./syntaxes/nl.tmLanguage.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "nl.restartServer",
+        "title": "Restart Language Server",
+        "category": "NL"
+      },
+      {
+        "command": "nl.showOutput",
+        "title": "Show Language Server Output",
+        "category": "NL"
+      }
+    ],
+    "configuration": {
+      "title": "NL",
+      "properties": {
+        "nl.server.path": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Path to the `nl-lsp` binary. When empty, `nl-lsp` is looked for on `PATH` and in `~/.cargo/bin`. Build it with `cargo build --release -p nl_lsp` in the NL repository."
+        },
+        "nl.server.args": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "description": "Extra arguments passed to nl-lsp."
+        },
+        "nl.server.searchPath": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "markdownDescription": "Directories of the import search path, as `nlc -I`. A relative path is resolved against the workspace folder."
+        },
+        "nl.server.declarations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "markdownDescription": "Declaration files (`.d.nl`) or directories of them, as `nlc --decl`. A relative path is resolved against the workspace folder."
+        },
+        "nl.server.env": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {},
+          "markdownDescription": "Environment variables set for nl-lsp, for example `{ \"RUST_BACKTRACE\": \"1\" }`."
+        },
+        "nl.nlc.path": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Path to the `nlc` binary, used for formatting. When empty, `nlc` is looked for on `PATH` and in `~/.cargo/bin`."
+        },
+        "nl.format.enable": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Format NL files with `nlc fmt`."
+        },
+        "nl.format.fix": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "Pass `--fix` to `nlc fmt`, which also rewrites what the formatter can only fix by changing the code (for example a `\"…\"` string continued with a backslash into a heredoc)."
+        },
+        "nl.trace.server": {
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "description": "Traces the communication between VS Code and nl-lsp."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "npm run typecheck && npm run test:grammar",
+    "test:grammar": "vscode-tmgrammar-test -g syntaxes/nl.tmLanguage.json \"test/grammar/*.nl\" && vscode-tmgrammar-snap -g syntaxes/nl.tmLanguage.json \"test/snapshot/*.nl\"",
+    "test:grammar:update": "vscode-tmgrammar-snap -u -g syntaxes/nl.tmLanguage.json \"test/snapshot/*.nl\"",
+    "package": "vsce package"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^10.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/vscode": "^1.90.0",
+    "@vscode/vsce": "^4.0.0",
+    "esbuild": "^0.28.2",
+    "typescript": "^5.6.0",
+    "vscode-tmgrammar-test": "^0.1.3"
+  }
+}
